@@ -20,5 +20,21 @@
             $query = $this->db->get_where('news', array('slug' => $slug));
             return $query->row_array();
         }
+
+        //method to write the data to the database
+        public function set_news(){
+
+            $this->load->helper('url');
+
+            $slug = url_title($this->input->post('title'),'dash', TRUE);
+
+            $data = array(
+                'title' => $this->input->post('title'), //post() method sanitize data for security
+                'slug' => $slug,
+                'text' => $this->input->post('text')
+            );
+
+            return $this->db->insert('news', $data);
+        }
     }
 ?>

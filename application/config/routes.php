@@ -49,6 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
+$route['news/create'] = 'news/create'; // for CodeIgniter to see 'create' as a method instead of a news item´s slug
 $route['news/(:any)'] = 'news/view/$1'; // routes URI´s with a slug to the view() method in the News controller
 $route['news'] = 'news';
 $route['default_controller'] = 'pages/view';

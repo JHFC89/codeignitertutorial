@@ -39,6 +39,32 @@
             $this->load->view('templates/footer', $data);
 
         }
+
+        //form validation
+        public function create(){
+
+            $this->load->helper('form');
+            $this->load->library('form_validation');
+
+            $data['title'] = 'Create a news item';
+
+            $this->form_validation->set_rules('title', 'Title', 'required'); //arguments set_rules(input field name, name for error messages, rule)
+            $this->form_validation->set_rules('text', 'Text', 'required');
+
+            //checks whether the form validation ran successfully
+            if($this->form_validation->run() === FALSE){
+
+                //failed, form is displayed again
+                $this->load->view('templates/header', $data);
+                $this->load->view('news/create');
+                $this->load->view('templates/footer');
+            } else{
+
+                // success, send to model and load a view to display success message
+                $this->news_model->set_news();
+                $this->load->view('news/success');
+            }
+        }
     }
 
 ?>
